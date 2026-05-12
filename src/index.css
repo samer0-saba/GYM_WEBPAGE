@@ -1,0 +1,487 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0f0f0f;
+  color: #f5f5f5;
+}
+
+/* Navbar */
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 60px;
+
+  background-color: #111;
+  border-bottom: 1px solid #222;
+
+  position: sticky;
+  top: 0;
+}
+
+.navbar h2{
+  color: crimson;
+  font-size: 30px;
+}
+
+.navbar ul{
+  display: flex;
+  gap: 30px;
+
+  list-style: none;
+}
+
+.navbar li{
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.navbar li:hover{
+  color: crimson;
+}
+
+/* Hero */
+
+.hero{
+  min-height: 90vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  padding: 20px;
+}
+
+.hero h1{
+  font-size: 70px;
+  max-width: 800px;
+
+  margin-bottom: 20px;
+
+  line-height: 1.2;
+}
+
+.hero p{
+  color: #999;
+
+  max-width: 650px;
+
+  line-height: 1.8;
+
+  margin-bottom: 30px;
+
+  font-size: 18px;
+}
+
+.hero button{
+  padding: 14px 30px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: crimson;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  transition: 0.3s;
+}
+
+.hero button:hover{
+  background-color: rgb(170, 0, 34);
+}
+
+/* Plans */
+
+.plans{
+  padding: 100px 20px;
+
+  text-align: center;
+}
+
+.plans h1{
+  font-size: 50px;
+
+  margin-bottom: 50px;
+}
+
+.plans-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 25px;
+}
+
+.plan-card{
+  background-color: #161616;
+
+  width: 280px;
+
+  padding: 40px 20px;
+
+  border-radius: 15px;
+
+  border: 1px solid #222;
+
+  transition: 0.3s;
+}
+
+.plan-card:hover{
+  transform: translateY(-10px);
+}
+
+.plan-card h2{
+  margin-bottom: 20px;
+
+  font-size: 28px;
+}
+
+.plan-card p{
+  color: crimson;
+
+  font-size: 30px;
+
+  margin-bottom: 25px;
+}
+
+.plan-card button{
+  width: 100%;
+
+  padding: 12px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: crimson;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.plan-card button:hover{
+  background-color: rgb(170, 0, 34);
+}
+
+/* BMI */
+
+.bmi{
+  padding: 100px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.bmi h1{
+  font-size: 45px;
+
+  margin-bottom: 20px;
+}
+
+.bmi input{
+  width: 320px;
+
+  padding: 14px;
+
+  border: 1px solid #333;
+
+  background-color: #161616;
+
+  color: white;
+
+  border-radius: 8px;
+
+  outline: none;
+}
+
+.bmi input:focus{
+  border-color: crimson;
+}
+
+.bmi button{
+  width: 320px;
+
+  padding: 14px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: crimson;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.bmi button:hover{
+  background-color: rgb(170, 0, 34);
+}
+
+.bmi h2{
+  margin-top: 20px;
+
+  color: crimson;
+}
+
+/* Responsive */
+
+@media(max-width: 768px){
+
+  .navbar{
+    padding: 20px;
+  }
+
+  .navbar ul{
+    gap: 15px;
+    font-size: 14px;
+  }
+
+  .hero h1{
+    font-size: 45px;
+  }
+
+  .hero p{
+    font-size: 16px;
+  }
+
+}
+
+
+.bmi select{
+  width: 320px;
+
+  padding: 14px;
+
+  border: 1px solid #333;
+
+  background-color: #161616;
+
+  color: white;
+
+  border-radius: 8px;
+
+  outline: none;
+}
+
+.bmi select:focus{
+  border-color: crimson;
+}
+.dashboard{
+  padding: 60px;
+}
+
+.card{
+  background-color: #161616;
+
+  padding: 20px;
+  margin-top: 20px;
+
+  border-radius: 10px;
+
+  border: 1px solid #222;
+}
+.plan-card img{
+  width: 100%;
+  height: 150px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  margin-bottom: 15px;
+}
+
+.plan-card ul{
+  list-style: none;
+
+  margin-bottom: 15px;
+
+  color: #aaa;
+}
+
+.plan-card li{
+  margin: 5px 0;
+  font-size: 14px;
+}
+.navbar a{
+  color: white;
+  text-decoration: none;
+}
+
+.navbar a:hover{
+  color: crimson;
+}
+.plan-card{
+  position: relative;
+
+  background-color: #161616;
+  padding: 30px;
+
+  border-radius: 15px;
+
+  width: 280px;
+
+  border: 1px solid #222;
+
+  transition: 0.3s;
+}
+
+.plan-card:hover{
+  transform: translateY(-10px);
+  border-color: crimson;
+}
+
+.plan-card .price{
+  color: crimson;
+  font-size: 28px;
+  margin: 15px 0;
+}
+
+.plan-card ul{
+  list-style: none;
+  margin: 15px 0;
+}
+
+.plan-card li{
+  margin: 6px 0;
+  color: #bbb;
+}
+
+.plan-card button{
+  width: 100%;
+  padding: 12px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: crimson;
+  color: white;
+
+  cursor: pointer;
+}
+
+.badge{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  background-color: gold;
+  color: black;
+
+  padding: 5px 10px;
+
+  font-size: 12px;
+
+  border-radius: 5px;
+}
+.about-preview{
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.about-preview h2{
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.about-preview p{
+  color: #aaa;
+  max-width: 600px;
+  margin: auto;
+  line-height: 1.7;
+}
+.trainers-grid{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 25px;
+
+  margin-top: 40px;
+}
+
+.trainer-card{
+  background-color: #161616;
+
+  width: 250px;
+
+  border-radius: 15px;
+
+  overflow: hidden;
+
+  border: 1px solid #222;
+
+  transition: 0.3s;
+}
+
+.trainer-card:hover{
+  transform: translateY(-8px);
+  border-color: crimson;
+}
+
+.trainer-card img{
+  width: 100%;
+  height: 200px;
+
+  object-fit: cover;
+}
+
+.trainer-card h2{
+  margin: 10px 0;
+}
+
+.trainer-card p{
+  color: #aaa;
+  margin-bottom: 15px;
+}
+.footer{
+  text-align: center;
+  padding: 30px;
+
+  background-color: #111;
+  border-top: 1px solid #222;
+
+  color: #777;
+  margin-top: 50px;
+}
+.bmi-result{
+  margin-top: 20px;
+  text-align: center;
+}
+
+.underweight{
+  color: orange;
+}
+
+.normal{
+  color: lightgreen;
+}
+
+.overweight{
+  color: crimson;
+}
+
+section{
+  padding: 80px 20px;
+}
