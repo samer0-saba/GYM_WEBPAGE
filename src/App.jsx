@@ -8,7 +8,7 @@ import Navbar from "./components/navbar";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/GYM_WEBPAGE">
 
     <Navbar />
 
