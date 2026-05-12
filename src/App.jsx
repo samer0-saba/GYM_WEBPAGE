@@ -4,7 +4,7 @@ import Home from "./pages/HomePage";
 import About from "./pages/AboutPage";
 import BMIPage from "./pages/BMIPage";
 import TrainersPage from "./pages/TrainersPage";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
