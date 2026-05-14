@@ -1,21 +1,20 @@
-export default function PlanCard(props) {
+export default function PlanCard({ features, highlight, price, title }) {
   return (
-    <div className={`plan-card ${props.highlight ? "highlight" : ""}`}>
+    <article className={`card plan-card ${highlight ? "highlight" : ""}`}>
+      {highlight && <span className="badge">Most Popular</span>}
 
-      {props.highlight && <span className="badge">Most Popular</span>}
-
-      <h2>{props.title}</h2>
-
-      <p className="price">{props.price}</p>
+      <h3>{title}</h3>
+      <p className="price">{price}</p>
 
       <ul>
-        {props.features.map((item, index) => (
-          <li key={index}>✔ {item}</li>
+        {features.map((item) => (
+          <li key={item}>✔ {item}</li>
         ))}
       </ul>
 
-      <button>Subscribe</button>
-
-    </div>
+      <button className="button secondary" type="button">
+        Subscribe
+      </button>
+    </article>
   );
 }

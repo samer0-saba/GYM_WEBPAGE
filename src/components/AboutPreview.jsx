@@ -1,14 +1,24 @@
+import { Link } from "react-router-dom";
+
 export default function AboutPreview() {
   return (
-    <section className="about-preview">
+    <section className="section-container two-column-section">
+      <div>
+        <p className="eyebrow">About FitZone</p>
+        <h2>Beginner-friendly coaching for real fitness goals.</h2>
+      </div>
 
-      <h2>About FitZone</h2>
+      <div>
+        <p>
+          FitZone helps members start with clear workout plans, simple progress
+          tracking, and a clean dashboard. We are building it step by step so
+          every file stays easy to understand.
+        </p>
 
-      <p>
-        FitZone is your fitness partner helping you reach your goals
-        with structured plans and professional trainers.
-      </p>
-
+        <Link className="text-link" to="/about">
+          Learn more →
+        </Link>
+      </div>
     </section>
   );
 }

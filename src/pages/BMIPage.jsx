@@ -1,9 +1,5 @@
-import BMI from "../components/BMI";
+import BMI from "../components/BMI.jsx";
 
 export default function BMIPage() {
-  return (
-    <div className="page">
-      <BMI />
-    </div>
-  );
+  return <BMI />;
 }

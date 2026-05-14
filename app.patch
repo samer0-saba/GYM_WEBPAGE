@@ -1,57 +1,38 @@
-diff --git a/src/App.jsx b/src/App.jsx
-index c552d879df194426c84a6e04e54259c97eb477f5..9697cde84abdac12eefe2c58ed6d204bae3a309c 100644
---- a/src/App.jsx
-+++ b/src/App.jsx
-@@ -1,28 +1,32 @@
--import { BrowserRouter, Routes, Route } from "react-router-dom";
-+import { BrowserRouter, Route, Routes } from "react-router-dom";
- 
--import Home from "./pages/HomePage";
--import About from "./pages/AboutPage";
--import BMIPage from "./pages/BMIPage";
--import TrainersPage from "./pages/TrainersPage";
--import Navbar from "./components/navbar";
-+import Navbar from "./components/Navbar.jsx";
-+import AboutPage from "./pages/AboutPage.jsx";
-+import BMIPage from "./pages/BMIPage.jsx";
-+import Dashboard from "./pages/Dashboard.jsx";
-+import HomePage from "./pages/HomePage.jsx";
-+import LoginPage from "./pages/LoginPage.jsx";
-+import ProgramsPage from "./pages/ProgramsPage.jsx";
-+import RegisterPage from "./pages/RegisterPage.jsx";
- 
- function App() {
-   return (
-     <BrowserRouter basename="/GYM_WEBPAGE">
--
--    <Navbar />
--
--      <Routes>
--
--        <Route path="/" element={<Home />} />
--        <Route path="/about" element={<About />} />
--        <Route path="/bmi" element={<BMIPage />} />
--        <Route path="/trainers" element={<TrainersPage />} />
--
--      </Routes>
--
-+      <Navbar />
+diff --git a/src/components/AboutPreview.jsx b/src/components/AboutPreview.jsx
+index 2804c95c4317bc9d7c7f8bc72c7b01f498a00f41..07426b27e2ba521538b7ee48b0f92d720ffdbe71 100644
+--- a/src/components/AboutPreview.jsx
++++ b/src/components/AboutPreview.jsx
+@@ -1,14 +1,23 @@
++import { Link } from "react-router-dom";
 +
-+      <main>
-+        <Routes>
-+          <Route path="/" element={<HomePage />} />
-+          <Route path="/about" element={<AboutPage />} />
-+          <Route path="/bmi" element={<BMIPage />} />
-+          <Route path="/programs" element={<ProgramsPage />} />
-+          <Route path="/login" element={<LoginPage />} />
-+          <Route path="/register" element={<RegisterPage />} />
-+          <Route path="/dashboard" element={<Dashboard />} />
-+        </Routes>
-+      </main>
-     </BrowserRouter>
-   );
- }
+ export default function AboutPreview() {
+   return (
+-    <section className="about-preview">
+-
+-      <h2>About FitZone</h2>
+-
+-      <p>
+-        FitZone is your fitness partner helping you reach your goals
+-        with structured plans and professional trainers.
+-      </p>
++    <section className="section-container two-column-section">
++      <div>
++        <p className="eyebrow">About FitZone</p>
++        <h2>Beginner-friendly coaching for real fitness goals.</h2>
++      </div>
  
--export default App;
++      <div>
++        <p>
++          FitZone helps members start with clear workout plans, simple progress
++          tracking, and a clean dashboard. We are building it step by step so
++          every file stays easy to understand.
++        </p>
++        <Link className="text-link" to="/about">
++          Learn more →
++        </Link>
++      </div>
+     </section>
+   );
+-}
 \ No newline at end of file
-+export default App;
++}

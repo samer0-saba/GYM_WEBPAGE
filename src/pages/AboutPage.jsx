@@ -1,14 +1,14 @@
-export default function About() {
+export default function AboutPage() {
   return (
-    <div className="page">
-
-      <h1>About Us</h1>
+    <section className="section-container page-section">
+      <p className="eyebrow">Our Mission</p>
+      <h1>We help beginners train with confidence.</h1>
 
       <p>
-        We are a fitness platform helping people achieve
-        their dream body through structured plans and trainers.
+        FitZone is a full stack gym website project. In this first step, we are
+        creating the React pages and layout before adding the backend, database,
+        authentication, and admin features.
       </p>
-
-    </div>
+    </section>
   );
 }

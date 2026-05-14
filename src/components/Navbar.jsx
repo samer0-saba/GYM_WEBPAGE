@@ -1,18 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+const navLinks = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  { label: "BMI", path: "/bmi" },
+  { label: "Programs", path: "/programs" },
+  { label: "Dashboard", path: "/dashboard" },
+];
 
 export default function Navbar() {
   return (
-    <nav className="navbar">
+    <header className="navbar">
+      <Link className="logo" to="/">
+        Fit<span>Zone</span>
+      </Link>
 
-      <h2>FitZone</h2>
+      <nav className="nav-links" aria-label="Main navigation">
+        {navLinks.map((link) => (
+          <NavLink key={link.path} to={link.path}>
+            {link.label}
+          </NavLink>
+        ))}
+      </nav>
 
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/bmi">BMI</Link></li>
-        <li><Link to="/trainers">Trainers</Link></li>
-      </ul>
-
-    </nav>
+      <Link className="nav-button" to="/login">
+        Login
+      </Link>
+    </header>
   );
 }

@@ -1,37 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+function readSavedFitnessData() {
+  return {
+    bmi: localStorage.getItem("bmi") || "",
+    status: localStorage.getItem("status") || "",
+    gender: localStorage.getItem("gender") || "",
+  };
+}
 
 export default function Dashboard() {
-
-  const [bmi, setBmi] = useState("");
-  const [status, setStatus] = useState("");
-  const [gender, setGender] = useState("");
-
-  useEffect(() => {
-    setBmi(localStorage.getItem("bmi"));
-    setStatus(localStorage.getItem("status"));
-    setGender(localStorage.getItem("gender"));
-  }, []);
+  const [fitnessData] = useState(readSavedFitnessData);
 
   return (
-    <div className="dashboard">
-
-      <h1>Dashboard</h1>
-
-      <div className="card">
-        <h2>BMI</h2>
-        <p>{bmi || "No data yet"}</p>
+    <section className="section-container page-section">
+      <div className="section-heading">
+        <p className="eyebrow">Dashboard</p>
+        <h1>Your fitness snapshot.</h1>
+        <p>
+          This page currently reads BMI data from localStorage until we add the
+          backend.
+        </p>
       </div>
 
-      <div className="card">
-        <h2>Status</h2>
-        <p>{status || "No data yet"}</p>
-      </div>
+      <div className="card-grid">
+        <article className="card">
+          <h3>BMI</h3>
+          <p>{fitnessData.bmi || "No data yet"}</p>
+        </article>
 
-      <div className="card">
-        <h2>Gender</h2>
-        <p>{gender || "Not selected"}</p>
-      </div>
+        <article className="card">
+          <h3>Status</h3>
+          <p>{fitnessData.status || "No data yet"}</p>
+        </article>
 
-    </div>
+        <article className="card">
+          <h3>Gender</h3>
+          <p>{fitnessData.gender || "Not selected"}</p>
+        </article>
+      </div>
+    </section>
   );
 }
