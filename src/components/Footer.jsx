@@ -1,7 +1,10 @@
 export default function Footer() {
   return (
     <footer className="footer">
-      <p>© 2026 FitZone. Built step by step with React.</p>
+      <div className="footer-logo">
+        Fit<span>Zone</span>
+      </div>
+      <p>&copy; {new Date().getFullYear()} FitZone. Designed for performance.</p>
     </footer>
   );
 }
