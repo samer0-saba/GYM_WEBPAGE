@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 function getBmiCategory(bmi) {
@@ -13,8 +13,28 @@ export default function BMI() {
   const [height, setHeight]   = useState("");
   const [gender, setGender]   = useState("");
   const [result, setResult]   = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  function calculateBMI() {
+  // Load existing data from localStorage on mount
+  useEffect(() => {
+    const savedBmi = localStorage.getItem("bmi");
+    const savedStatus = localStorage.getItem("status");
+    const savedWeight = localStorage.getItem("weight");
+    const savedHeight = localStorage.getItem("height");
+    const savedGender = localStorage.getItem("gender");
+
+    if (savedWeight) setWeight(savedWeight);
+    if (savedHeight) setHeight(savedHeight);
+    if (savedGender) setGender(savedGender);
+    
+    if (savedBmi && savedStatus) {
+      const color = getBmiCategory(savedBmi).color;
+      setResult({ bmi: savedBmi, label: savedStatus, color });
+    }
+  }, []);
+
+  async function calculateBMI() {
     if (!weight || !height) return;
     const h = Number(height) / 100;
     const bmi = Number(weight) / (h * h);
@@ -28,6 +48,38 @@ export default function BMI() {
     localStorage.setItem("weight", weight);
     localStorage.setItem("height", height);
     localStorage.setItem("gender", gender);
+
+    // Save to backend if user is logged in
+    const token = localStorage.getItem("token");
+    if (token) {
+      setLoading(true);
+      setMessage("");
+      try {
+        const response = await fetch("http://localhost:5000/api/bmi", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            weight: Number(weight),
+            height: Number(height),
+            bmiValue: Number(fixed),
+            status: category.label
+          })
+        });
+
+        if (response.ok) {
+          setMessage("Saved to your account");
+        }
+      } catch (error) {
+        console.error("Failed to save BMI", error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setMessage("Saved locally (Login to sync)");
+    }
   }
 
   return (
@@ -89,10 +141,10 @@ export default function BMI() {
           className="button primary"
           type="button"
           onClick={calculateBMI}
-          disabled={!weight || !height}
-          style={{ opacity: !weight || !height ? 0.55 : 1 }}
+          disabled={!weight || !height || loading}
+          style={{ opacity: !weight || !height || loading ? 0.55 : 1 }}
         >
-          Calculate BMI
+          {loading ? "Saving..." : "Calculate BMI"}
         </button>
 
         <AnimatePresence>
@@ -112,9 +164,11 @@ export default function BMI() {
                   {result.label}
                 </span>
               </span>
-              <span style={{ fontSize: "0.8rem", color: "var(--color-muted)", marginTop: "0.25rem" }}>
-                Saved to your dashboard
-              </span>
+              {message && (
+                <span style={{ fontSize: "0.8rem", color: "var(--color-muted)", marginTop: "0.25rem" }}>
+                  {message}
+                </span>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

@@ -1,7 +1,64 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setError("Please fill in all fields.");
+      return;
+    }
+    
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      // Save token to localStorage
+      localStorage.setItem("token", data.token);
+
+      // Restore BMI data if any
+      try {
+        const bmiRes = await fetch("http://localhost:5000/api/bmi", {
+          headers: { "Authorization": `Bearer ${data.token}` }
+        });
+        if (bmiRes.ok) {
+          const bmiData = await bmiRes.json();
+          localStorage.setItem("bmi", bmiData.bmiValue);
+          localStorage.setItem("status", bmiData.status);
+          localStorage.setItem("weight", bmiData.weight);
+          localStorage.setItem("height", bmiData.height);
+        }
+      } catch (err) {
+        console.error("Failed to restore BMI data", err);
+      }
+
+      // Redirect to home or dashboard
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="section-container auth-page">
       <motion.div
@@ -20,22 +77,36 @@ export default function LoginPage() {
 
         <div className="auth-divider" />
 
+        {error && <p style={{ color: "#f87171", marginBottom: "1rem" }}>{error}</p>}
+
         <label>
           Email address
-          <input type="email" placeholder="you@example.com" />
+          <input 
+            type="email" 
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </label>
 
         <label>
           Password
-          <input type="password" placeholder="••••••••" />
+          <input 
+            type="password" 
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </label>
 
         <button
           className="button primary"
           type="button"
-          style={{ width: "100%", marginTop: "0.5rem" }}
+          onClick={handleLogin}
+          disabled={loading}
+          style={{ width: "100%", marginTop: "0.5rem", opacity: loading ? 0.7 : 1 }}
         >
-          Sign In
+          {loading ? "Signing In..." : "Sign In"}
         </button>
 
         <p style={{ textAlign: "center", marginTop: "0.5rem" }}>
